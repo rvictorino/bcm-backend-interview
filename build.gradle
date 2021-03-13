@@ -1,0 +1,28 @@
+plugins {
+    id 'groovy'
+}
+
+group 'com.rvictorino'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:3.0.7'
+
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.rvictorino.bcm.backend.interview.BcmBackendInterview"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
