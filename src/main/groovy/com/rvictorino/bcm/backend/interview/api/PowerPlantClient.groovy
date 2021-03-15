@@ -1,7 +1,15 @@
 package com.rvictorino.bcm.backend.interview.api
 
 import com.rvictorino.bcm.backend.interview.model.Production
+import groovyx.net.http.HTTPBuilder
 
-interface PowerPlantClient {
-    Production getProduction(String fromDate, String toDate)
+abstract class PowerPlantClient {
+
+    final HTTPBuilder httpClient
+
+    PowerPlantClient(HTTPBuilder httpClient) {
+        this.httpClient = httpClient
+    }
+
+    abstract Production getProduction(String fromDate, String toDate)
 }

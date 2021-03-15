@@ -6,6 +6,7 @@ import com.rvictorino.bcm.backend.interview.api.HounslowApiClient
 import com.rvictorino.bcm.backend.interview.model.Production
 import com.rvictorino.bcm.backend.interview.out.JsonPrinter
 import com.rvictorino.bcm.backend.interview.out.ProductionPrinter
+import groovyx.net.http.HTTPBuilder
 
 class BcmBackendInterview {
 
@@ -19,10 +20,12 @@ class BcmBackendInterview {
 
         PowerSumAggregator powerAggregator = new PowerSumAggregator()
 
+        HTTPBuilder httpBuilder = new HTTPBuilder()
+
         //TODO implement and replace other power plants clients
-        powerAggregator.addPowerPlant(new HawesApiClient())
-        powerAggregator.addPowerPlant(new BarnsleyApiClient())
-        powerAggregator.addPowerPlant(new HounslowApiClient())
+        powerAggregator.addPowerPlant(new HawesApiClient(httpBuilder))
+        powerAggregator.addPowerPlant(new BarnsleyApiClient(httpBuilder))
+        powerAggregator.addPowerPlant(new HounslowApiClient(httpBuilder))
 
         //TODO use more appropriate types for arguments (currently Strings)
         Production sum = powerAggregator.getProductionSum(from, to)

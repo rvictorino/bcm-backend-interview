@@ -8,21 +8,22 @@ import java.time.Instant
 
 
 //TODO use template pattern to handle requesting and parsing response
-class HawesApiClient implements PowerPlantClient {
+class HawesApiClient extends PowerPlantClient {
 
     //TODO extract to config
     static final String HAWES_MONITORING_API_ENDPOINT = 'https://interview.beta.bcmenergy.fr/hawes'
 
-    //TODO IoC? pass dependency to constructor
-    final HTTPBuilder client = new HTTPBuilder(HAWES_MONITORING_API_ENDPOINT)
+    HawesApiClient(HTTPBuilder httpClient) {
+        super(httpClient)
+    }
 
     @Override
     Production getProduction(String fromDate, String toDate) {
         //TODO handle errors: Http or parsing
-        List<Map> jsonResponse = client.get(contentType : 'application/json', query: [
+        List<Map> jsonResponse = httpClient.get(uri: HAWES_MONITORING_API_ENDPOINT, contentType : 'application/json', query: [
                 from: fromDate,
                 to: toDate
-        ]) as List<Map>
+        ], ) as List<Map>
 
         Production production = new Production()
         for(Map segment in jsonResponse) {

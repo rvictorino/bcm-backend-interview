@@ -6,16 +6,18 @@ import groovyx.net.http.HTTPBuilder
 
 import java.time.Instant
 
-class BarnsleyApiClient implements PowerPlantClient {
+class BarnsleyApiClient extends PowerPlantClient {
 
     static final String BARNSLEY_MONITORING_API_ENDPOINT = 'https://interview.beta.bcmenergy.fr/barnsley'
 
-    final HTTPBuilder client = new HTTPBuilder(BARNSLEY_MONITORING_API_ENDPOINT)
+    BarnsleyApiClient(HTTPBuilder httpClient) {
+        super(httpClient)
+    }
 
     @Override
     Production getProduction(String fromDate, String toDate) {
         //TODO handle errors: Http or parsing
-        List<Map> jsonResponse = client.get(contentType : 'application/json', query: [
+        List<Map> jsonResponse = httpClient.get(uri: BARNSLEY_MONITORING_API_ENDPOINT, contentType : 'application/json', query: [
                 from: fromDate,
                 to: toDate
         ]) as List<Map>

@@ -8,16 +8,18 @@ import groovyx.net.http.HTTPBuilder
 
 import java.time.Instant
 
-class HounslowApiClient implements PowerPlantClient {
+class HounslowApiClient extends PowerPlantClient {
 
     static final String HOUNSLOW_MONITORING_API_ENDPOINT = 'https://interview.beta.bcmenergy.fr/hounslow'
 
-    final HTTPBuilder client = new HTTPBuilder(HOUNSLOW_MONITORING_API_ENDPOINT)
+    HounslowApiClient(HTTPBuilder httpClient) {
+        super(httpClient)
+    }
 
     @Override
     Production getProduction(String fromDate, String toDate) {
         //TODO handle errors: Http or parsing
-        String csvResponse = client.get(query: [
+        String csvResponse = httpClient.get(uri: HOUNSLOW_MONITORING_API_ENDPOINT, query: [
                 from: fromDate,
                 to: toDate
         ]) as String
