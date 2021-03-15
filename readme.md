@@ -22,7 +22,7 @@ Since 2 hour passed before I was able to implement clients for all powerplants A
 Thoughts about what can be improved:
  - [X] Implement clients for Barnsley and Hounslow APIs
  - [X] Implement output formatter for CSV
- - [ ] Implement data filling when APIs fail
+ - [X] Implement data filling when APIs fail
  - [ ] Implement error handling, choose a strategy for failing API calls
  - [ ] Add some logging, improve user interaction (error/success messages)
  - [ ] Implement arguments validation

@@ -34,6 +34,8 @@ class HounslowApiClient extends PowerPlantClient {
             production.addSegment(new ProductionSegment(start: date, end: end, power: power))
         }
 
+        production.fillMissingSegments()
+
         return production
     }
 }
