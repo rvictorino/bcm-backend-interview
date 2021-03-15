@@ -1,6 +1,8 @@
 package com.rvictorino.bcm.backend.interview
 
+import com.rvictorino.bcm.backend.interview.api.BarnsleyApiClient
 import com.rvictorino.bcm.backend.interview.api.HawesApiClient
+import com.rvictorino.bcm.backend.interview.api.HounslowApiClient
 import com.rvictorino.bcm.backend.interview.model.Production
 import com.rvictorino.bcm.backend.interview.out.JsonPrinter
 import com.rvictorino.bcm.backend.interview.out.ProductionPrinter
@@ -19,7 +21,8 @@ class BcmBackendInterview {
 
         //TODO implement and replace other power plants clients
         powerAggregator.addPowerPlant(new HawesApiClient())
-        powerAggregator.addPowerPlant(new HawesApiClient())
+        powerAggregator.addPowerPlant(new BarnsleyApiClient())
+        powerAggregator.addPowerPlant(new HounslowApiClient())
 
         //TODO use more appropriate types for arguments (currently Strings)
         Production sum = powerAggregator.getProductionSum(from, to)
