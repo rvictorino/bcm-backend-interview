@@ -3,7 +3,7 @@ package com.rvictorino.bcm.backend.interview.out
 import com.rvictorino.bcm.backend.interview.model.Production
 import com.rvictorino.bcm.backend.interview.model.ProductionSegment
 
-class CsvPrinter implements ProductionPrinter {
+class CsvFormatter implements OutputFormatter {
     static final String SEPARATOR = ','
     static final String LINE_END = '\n'
 

@@ -2,6 +2,6 @@ package com.rvictorino.bcm.backend.interview.out
 
 import com.rvictorino.bcm.backend.interview.model.Production
 
-interface ProductionPrinter {
+interface OutputFormatter {
     void formatAndPrint(Production production)
 }

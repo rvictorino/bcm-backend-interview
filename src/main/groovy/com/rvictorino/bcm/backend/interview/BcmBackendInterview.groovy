@@ -4,10 +4,10 @@ import com.rvictorino.bcm.backend.interview.api.BarnsleyApiClient
 import com.rvictorino.bcm.backend.interview.api.HawesApiClient
 import com.rvictorino.bcm.backend.interview.api.HounslowApiClient
 import com.rvictorino.bcm.backend.interview.model.Production
-import com.rvictorino.bcm.backend.interview.out.CsvPrinter
-import com.rvictorino.bcm.backend.interview.out.JsonPrinter
+import com.rvictorino.bcm.backend.interview.out.CsvFormatter
+import com.rvictorino.bcm.backend.interview.out.JsonFormatter
 import com.rvictorino.bcm.backend.interview.out.OutputFormat
-import com.rvictorino.bcm.backend.interview.out.ProductionPrinter
+import com.rvictorino.bcm.backend.interview.out.OutputFormatter
 import groovyx.net.http.HTTPBuilder
 
 class BcmBackendInterview {
@@ -30,21 +30,18 @@ class BcmBackendInterview {
         //TODO use more appropriate types for arguments (currently Strings)
         Production sum = powerAggregator.getProductionSum(from, to)
 
-        ProductionPrinter formatter = getPrinter(outputFormat)
-
+        OutputFormatter formatter = getPrinter(outputFormat)
         formatter.formatAndPrint(sum)
     }
 
-    //TODO extract
-    static ProductionPrinter getPrinter(String format) {
+    static OutputFormatter getPrinter(String format) {
         OutputFormat outputFormat = OutputFormat.getByName(format.toUpperCase())
         if(outputFormat == OutputFormat.JSON) {
-            return new JsonPrinter()
+            return new JsonFormatter()
         }
         if(outputFormat == OutputFormat.CSV) {
-            return new CsvPrinter()
+            return new CsvFormatter()
         }
-        //TODO implement other formatter
         throw new IllegalArgumentException("Cannot find output formatAndPrint: ${format}")
     }
 }

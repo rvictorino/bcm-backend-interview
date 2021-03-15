@@ -5,7 +5,7 @@ import com.rvictorino.bcm.backend.interview.out.converter.InstantToEpochJsonConv
 import groovy.json.JsonGenerator
 import groovy.json.JsonOutput
 
-class JsonPrinter implements ProductionPrinter {
+class JsonFormatter implements OutputFormatter {
     @Override
     void formatAndPrint(Production production) {
          JsonGenerator jsonGenerator = new JsonGenerator.Options()
