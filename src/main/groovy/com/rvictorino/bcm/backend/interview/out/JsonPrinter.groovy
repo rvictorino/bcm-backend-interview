@@ -6,7 +6,6 @@ import groovy.json.JsonGenerator
 import groovy.json.JsonOutput
 
 class JsonPrinter implements ProductionPrinter {
-
     @Override
     void formatAndPrint(Production production) {
          JsonGenerator jsonGenerator = new JsonGenerator.Options()

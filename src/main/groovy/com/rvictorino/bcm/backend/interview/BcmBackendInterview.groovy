@@ -4,13 +4,13 @@ import com.rvictorino.bcm.backend.interview.api.BarnsleyApiClient
 import com.rvictorino.bcm.backend.interview.api.HawesApiClient
 import com.rvictorino.bcm.backend.interview.api.HounslowApiClient
 import com.rvictorino.bcm.backend.interview.model.Production
+import com.rvictorino.bcm.backend.interview.out.CsvPrinter
 import com.rvictorino.bcm.backend.interview.out.JsonPrinter
+import com.rvictorino.bcm.backend.interview.out.OutputFormat
 import com.rvictorino.bcm.backend.interview.out.ProductionPrinter
 import groovyx.net.http.HTTPBuilder
 
 class BcmBackendInterview {
-
-    static final String JSON_FORMAT = 'json'
 
     static void main(String[] args) {
         //TODO validate arguments
@@ -37,8 +37,12 @@ class BcmBackendInterview {
 
     //TODO extract
     static ProductionPrinter getPrinter(String format) {
-        if(JSON_FORMAT == format) {
+        OutputFormat outputFormat = OutputFormat.getByName(format.toUpperCase())
+        if(outputFormat == OutputFormat.JSON) {
             return new JsonPrinter()
+        }
+        if(outputFormat == OutputFormat.CSV) {
+            return new CsvPrinter()
         }
         //TODO implement other formatter
         throw new IllegalArgumentException("Cannot find output formatAndPrint: ${format}")
