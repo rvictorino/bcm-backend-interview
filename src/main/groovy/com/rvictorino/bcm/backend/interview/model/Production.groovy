@@ -54,7 +54,7 @@ class Production {
         this.production.put(segmentTime, new ProductionSegment(
                 start: segmentTime,
                 end: after.start,
-                power: before.power + after.power
+                power: (before.power + after.power) / 2
         ))
     }
 
